@@ -1,0 +1,17 @@
+{
+  "name": "grab-screenshots",
+  "version": "1.0.0",
+  "description": "A puppeteer script to capture screenshots",
+  "main": "index.js",
+  "scripts": {
+    "diff": "node diff.js",
+    "snap": "node index.js"
+  },
+  "author": "ryelle",
+  "license": "GPL-2.0-or-later",
+  "devDependencies": {
+    "@wordpress/e2e-test-utils": "^4.15.1",
+    "blink-diff": "^1.0.13",
+    "puppeteer": "^5.5.0"
+  }
+}
