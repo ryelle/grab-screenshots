@@ -6,7 +6,8 @@ process.env.WP_BASE_URL = "http://trunk.wordpress.test/";
 const puppeteer = require("puppeteer");
 const { visitAdminPage } = require("@wordpress/e2e-test-utils");
 
-const screenshotDOMElement = require("./utils");
+const screenshotDOMElement = require("./utils/screenshot");
+const setColorScheme = require("./utils/set-color-scheme");
 
 const IMAGE_PATH = process.env.IMAGE_PATH || "screenshots";
 const schemes = [
@@ -20,20 +21,6 @@ const schemes = [
   "ocean",
   "sunrise",
 ];
-
-/**
- * Load profile page and run the ajax request inline.
- */
-async function setColorScheme(slug) {
-  await visitAdminPage("profile.php");
-  await page.evaluate(async (color_scheme) => {
-    await jQuery.post(ajaxurl, {
-      action: "save-user-color-scheme",
-      color_scheme: color_scheme,
-      nonce: jQuery("#color-nonce").val(),
-    });
-  }, slug);
-}
 
 (async () => {
   global.browser = await puppeteer.launch();
