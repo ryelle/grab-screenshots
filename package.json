@@ -1,17 +1,40 @@
 {
-  "name": "grab-screenshots",
-  "version": "1.0.0",
-  "description": "A puppeteer script to capture screenshots",
-  "main": "index.js",
-  "scripts": {
-    "diff": "node diff.js",
-    "snap": "node index.js"
-  },
-  "author": "ryelle",
-  "license": "GPL-2.0-or-later",
-  "devDependencies": {
-    "@wordpress/e2e-test-utils": "^4.15.1",
-    "blink-diff": "^1.0.13",
-    "puppeteer": "^5.5.0"
-  }
+	"name": "grab-screenshots",
+	"version": "1.0.0",
+	"description": "A puppeteer script to capture screenshots",
+	"main": "index.js",
+	"scripts": {
+		"lint": "eslint *.js utils",
+		"diff": "node diff.js",
+		"snap": "node index.js",
+		"admin-pages": "node admin-pages.js"
+	},
+	"author": "ryelle",
+	"license": "GPL-2.0-or-later",
+	"devDependencies": {
+		"@wordpress/e2e-test-utils": "^4.15.1",
+		"@wordpress/eslint-plugin": "^7.3.0",
+		"@wordpress/prettier-config": "^0.4.0",
+		"blink-diff": "^1.0.13",
+		"eslint": "^7.15.0",
+		"puppeteer": "^5.5.0"
+	},
+	"eslintConfig": {
+		"extends": [
+			"plugin:@wordpress/eslint-plugin/esnext"
+		],
+		"parserOptions": {
+			"ecmaVersion": 2020,
+			"sourceType": "module"
+		},
+		"env": {
+			"node": true,
+			"es6": true
+		},
+		"globals": {
+			"browser": "readonly",
+			"page": "readonly"
+		}
+	},
+	"prettier": "@wordpress/prettier-config"
 }
