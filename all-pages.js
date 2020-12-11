@@ -9,12 +9,13 @@ const { visitAdminPage } = require( '@wordpress/e2e-test-utils' );
 const setColorScheme = require( './utils/set-color-scheme' );
 
 const IMAGE_PATH = process.env.IMAGE_PATH || 'screenshots';
+const COLOR_SCHEME = process.env.COLOR_SCHEME || 'fresh';
 
 ( async () => {
 	global.browser = await puppeteer.launch();
 	global.page = await browser.newPage();
 
-	await setColorScheme( 'fresh' );
+	await setColorScheme( COLOR_SCHEME );
 
 	await page.setViewport( {
 		width: 1024,
