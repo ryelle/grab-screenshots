@@ -1,7 +1,7 @@
 /* Set up vars for use in e2e-test-utils */
-process.env.WP_USERNAME = 'admin';
-process.env.WP_PASSWORD = 'password';
-process.env.WP_BASE_URL = 'http://trunk.wordpress.test/';
+process.env.WP_USERNAME = process.env.WP_USERNAME || 'admin';
+process.env.WP_PASSWORD = process.env.WP_PASSWORD || 'password';
+process.env.WP_BASE_URL = process.env.WP_BASE_URL || 'http://trunk.wordpress.test/';
 
 const puppeteer = require( 'puppeteer' );
 const { visitAdminPage } = require( '@wordpress/e2e-test-utils' );
