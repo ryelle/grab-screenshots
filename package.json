@@ -34,6 +34,9 @@
 		"globals": {
 			"browser": "readonly",
 			"page": "readonly"
+		},
+		"rules": {
+			"no-console": "off"
 		}
 	},
 	"prettier": "@wordpress/prettier-config"

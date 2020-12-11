@@ -1,9 +1,9 @@
 const BlinkDiff = require( 'blink-diff' );
 const fs = require( 'fs' );
 
-const DIFF_PATH = process.env.DIFF_PATH || 'diffs';
-const IMAGE_A_PATH = process.env.IMAGE_A_PATH || 'photos';
-const IMAGE_B_PATH = process.env.IMAGE_B_PATH || 'photos-branch';
+const DIFF_PATH = process.env.DIFF_PATH || 'photos-diffs';
+const IMAGE_A_PATH = process.env.IMAGE_A_PATH || 'photos-a';
+const IMAGE_B_PATH = process.env.IMAGE_B_PATH || 'photos-b';
 
 /**
  * Run using `npm run diff`. Optionally pass in custom folders using env variables.
@@ -17,9 +17,7 @@ function runDiff( image ) {
 		imageAPath: `${ IMAGE_A_PATH }/${ image }`,
 		imageBPath: `${ IMAGE_B_PATH }/${ image }`,
 		imageOutputPath: `./${ DIFF_PATH }/${ image }`,
-
-		// thresholdType: BlinkDiff.THRESHOLD_PERCENT, defaults to pixels
-		threshold: 50,
+		threshold: 50, // if at least 50 pixels are different, this will "fail".
 	} );
 
 	return new Promise( ( resolve, reject ) => {
@@ -38,9 +36,9 @@ function runDiff( image ) {
 		const files = await fs.promises.readdir( `./${ IMAGE_A_PATH }` );
 		for ( const file of files ) {
 			const result = await runDiff( file );
-			console.log( file, result ); // eslint-disable-line no-console
+			console.log( file, result );
 		}
 	} catch ( error ) {
-		console.error( error ); // eslint-disable-line no-console
+		console.error( error );
 	}
 } )();

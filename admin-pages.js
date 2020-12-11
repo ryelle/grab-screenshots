@@ -24,6 +24,7 @@ const IMAGE_PATH = process.env.IMAGE_PATH || 'screenshots';
 
 	const linkList = await page.evaluate( () => {
 		const links = [];
+		// eslint-disable-next-line no-undef -- document is defined in page context.
 		document
 			.querySelectorAll( '#adminmenu a.menu-top' )
 			.forEach( ( el ) => links.push( el.href ) );
