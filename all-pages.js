@@ -6,6 +6,7 @@ process.env.WP_BASE_URL = process.env.WP_BASE_URL || 'http://trunk.wordpress.tes
 const puppeteer = require( 'puppeteer' );
 const { visitAdminPage } = require( '@wordpress/e2e-test-utils' );
 
+const screenshotDOMElement = require( './utils/screenshot' );
 const setColorScheme = require( './utils/set-color-scheme' );
 
 const IMAGE_PATH = process.env.IMAGE_PATH || 'screenshots';
@@ -32,7 +33,8 @@ const COLOR_SCHEME = process.env.COLOR_SCHEME || 'fresh';
 		return links;
 	} );
 
-	for ( let i = 0; i < linkList.length; i++ ) {
+	let i;
+	for ( i = 0; i < linkList.length; i++ ) {
 		const url = new URL( linkList[ i ] );
 		await visitAdminPage(
 			url.pathname.replace( '/wp-admin/', '' ),
@@ -44,6 +46,29 @@ const COLOR_SCHEME = process.env.COLOR_SCHEME || 'fresh';
 		}
 		await page.screenshot( { path: `${ IMAGE_PATH }/ss-${ i }.png` } );
 	}
+
+	// Open a single image in details view.
+	await visitAdminPage( 'upload.php', 'item=7' );
+	await page.waitForSelector( 'img.details-image' );
+	await page.screenshot( { path: `${ IMAGE_PATH }/ss-${ i }.png` } );
+
+	// Open the contextual help panel.
+	await visitAdminPage( 'edit.php' );
+	await page.click( '#contextual-help-link' );
+	await page.waitForSelector( '#tab-panel-overview' );
+	// Wait 1s for the animation to complete.
+	await page.waitForTimeout( 1000 );
+	await screenshotDOMElement( {
+		path: `${ IMAGE_PATH }/ss-${ i + 1 }.png`,
+		selector: '#screen-meta',
+		padding: 16,
+	} );
+
+	// Get the Site Health page.
+	await visitAdminPage( 'site-health.php' );
+	await page.waitForTimeout( 100 );
+	await page.hover( '.health-check-accordion-trigger' );
+	await page.screenshot( { path: `${ IMAGE_PATH }/ss-${ i + 2 }.png` } );
 
 	await browser.close();
 } )();
