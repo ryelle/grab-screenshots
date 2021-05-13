@@ -23,6 +23,7 @@ const schemes = [
 ];
 
 ( async () => {
+	// These need to be globals, otherwise e2e-test-utils can't use them.
 	global.browser = await puppeteer.launch();
 	global.page = await browser.newPage();
 
