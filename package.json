@@ -6,8 +6,7 @@
 	"scripts": {
 		"lint": "eslint *.js utils",
 		"diff": "node diff.js",
-		"snap": "node index.js",
-		"admin-pages": "node admin-pages.js"
+		"snap": "node index.js"
 	},
 	"author": "ryelle",
 	"license": "GPL-2.0-or-later",
