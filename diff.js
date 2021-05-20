@@ -13,6 +13,9 @@ const IMAGE_B_PATH = process.env.IMAGE_B_PATH || 'photos-b';
  */
 
 function runDiff( image ) {
+	if ( image[ 0 ] === '.' ) {
+		return;
+	}
 	const diff = new BlinkDiff( {
 		imageAPath: `${ IMAGE_A_PATH }/${ image }`,
 		imageBPath: `${ IMAGE_B_PATH }/${ image }`,
