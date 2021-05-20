@@ -19,7 +19,7 @@ The scripts use environment variables for configuration. Pass these in before th
 WP_BASE_URL=http://localhost:8888 npm run snap
 ```
 
-The following variables are used for `index.js`/`npm run snap` and `all-pages.js`.
+The following variables are used for `index.js`/`npm run snap`.
 
 | Env Variable | Default | Description |
 |--------------|---------|-------------|
@@ -31,14 +31,6 @@ The following variables are used for `index.js`/`npm run snap` and `all-pages.js
 ### `index.js`
 
 Run this with `npm run snap`. It will loop over all core color schemes and take screenshots of an assortment of pages, sometimes with elements hovered or focused. Read through the script to see the steps it takes.
-
-### `all-pages.js`
-
-Run this with `node all-pages.js`. This will reset to the default color scheme (or whichever is passed through `COLOR_SCHEME`), then take screenshots of every top-level page in the admin menu (Posts, Pages, Comments, etc).
-
-| Env Variable | Default | Description |
-|--------------|---------|-------------|
-| COLOR_SCHEME | fresh | Reset the color scheme before grabbing screenshots |
 
 ### `diff.js`
 
@@ -58,13 +50,13 @@ If you want to check the difference between two branches of WordPress, you could
 2. Run the first screenshot grab.
 	```bash
 	mkdir screenshots-trunk
-	IMAGE_PATH=screenshots-trunk node all-pages.js
+	IMAGE_PATH=screenshots-trunk node index.js
 	```
 3. Check out your branch and build.
 4. Run the second screenshot grab.
 	```bash
 	mkdir screenshots-branch
-	IMAGE_PATH=screenshots-branch node all-pages.js
+	IMAGE_PATH=screenshots-branch node index.js
 	```
 5. Run the image comparison script with each folder.
 	```bash
