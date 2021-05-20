@@ -1,7 +1,7 @@
 Grab Screenshots
 ================
 
-This is a collection of scripts for taking and comparing screenshots of WordPress admin pages.
+This is a collection of scripts for taking and comparing screenshots of WordPress admin pages. This is mostly a personal tool, where I create scripts to run through various pages while testing tickets.
 
 ## Quickstart
 
